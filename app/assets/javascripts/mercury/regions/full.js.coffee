@@ -36,7 +36,7 @@ class @Mercury.Regions.Full extends Mercury.Region
         @document.execCommand('styleWithCSS', false, false)
         @document.execCommand('insertBROnReturn', false, true)
         @document.execCommand('enableInlineTableEditing', false, false)
-        @document.execCommand('enableObjectResizing', false, false)
+        @document.execCommand('enableObjectResizing', false, true)
       catch e
         # intentionally do nothing if any of these fail, to broaden support for Opera
 

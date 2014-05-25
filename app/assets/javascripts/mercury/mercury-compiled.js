@@ -7965,7 +7965,7 @@ Showdown.converter = function() {
           this.document.execCommand('styleWithCSS', false, false);
           this.document.execCommand('insertBROnReturn', false, true);
           this.document.execCommand('enableInlineTableEditing', false, false);
-          return this.document.execCommand('enableObjectResizing', false, false);
+          return this.document.execCommand('enableObjectResizing', false, true);
         } catch (e) {
 
         }
