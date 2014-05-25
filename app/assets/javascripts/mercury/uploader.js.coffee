@@ -36,7 +36,7 @@ jQuery.extend Mercury.uploader,
 
   fileReaderSupported: ->
     !!(window.FileReader)
-  
+
   formDataSupported: ->
     !!(window.FormData)
 
@@ -128,29 +128,9 @@ jQuery.extend Mercury.uploader,
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
     xhr.setRequestHeader(Mercury.config.csrfHeader, Mercury.csrfToken)
 
-    # Homespun multipart uploads. Chrome 18, Firefox 11.
-    #
-    if Mercury.uploader.fileReaderSupported()
-      @file.readAsBinaryString (result) =>
-        
-        multipart = new Mercury.uploader.MultiPartPost(Mercury.config.uploading.inputName, @file, result)
-
-        # update the content size so we can calculate
-        @file.updateSize(multipart.delta)
-
-        # set the content type and send
-        xhr.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + multipart.boundary)
-        xhr.sendAsBinary(multipart.body)
-    
-    # FormData based. Safari 5.1.2.
-    #
-    else
-      formData = new FormData()
-      formData.append(Mercury.config.uploading.inputName, @file.file, @file.file.name)
-
-      xhr.send(formData)
-
-
+    formData = new FormData()
+    formData.append(Mercury.config.uploading.inputName, @file.file, @file.file.name)
+    xhr.send(formData)
 
   updateStatus: (message, loaded) ->
     @element.find('.mercury-uploader-progress span').html(Mercury.I18n(message).toString())
